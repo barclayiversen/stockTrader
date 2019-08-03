@@ -1,6 +1,6 @@
 <template>
 <div class="col-sm-6 col-md-4">
-    <div class="panel panel-success">
+    <div class="panel panel-info">
         <div class="panel-heading">
             <h3 class="panel-title">
                 {{stock.name}}
@@ -14,14 +14,15 @@
                     class="form-control"
                     placeholder="Quantity"
                     v-model="quantity"
+                    :class="{danger: insufficientQuantity}"
                     >
             </div>
             <div class="pull-right">
                 <button 
                     class="btn btn-success"
                     @click="sellStock"
-                    :disabled="quantity <= 0"
-                    >Sell</button>
+                    :disabled="insufficientQuantity || quantity <= 0"
+                    >{{ insufficientQuantity ? 'Not enough' : 'Sell' }}</button>
             </div>
         </div>
     </div>
@@ -59,6 +60,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+  .danger {
+        border: 1px solid red;
+    }
 </style>

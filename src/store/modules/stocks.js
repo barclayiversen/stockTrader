@@ -9,7 +9,16 @@ const mutations = {
         state.stocks = stocks;
     },
     'RND_STOCKS' (state) {
-
+        //Interesting thing to note, generally prices 
+        //will tank and never recover after a while. 
+        //I added the first if check and reduced the 
+        //subtraction to ease this. 
+        state.stocks.forEach(stock => {
+            if (stock.price == 1) {
+                stock.price = 2;
+            };
+            stock.price = Math.round(stock.price * (1 + Math.random() - 0.45))
+        });
     }
 };
 
